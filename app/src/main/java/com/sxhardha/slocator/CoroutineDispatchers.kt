@@ -3,7 +3,7 @@ package com.sxhardha.slocator
 import kotlinx.coroutines.CoroutineDispatcher
 
 
-data class Dispatchers(
+data class CoroutineDispatchers(
     val mainDispatcher: CoroutineDispatcher,
     val ioDispatchers: CoroutineDispatcher
 )

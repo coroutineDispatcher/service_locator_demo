@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class EntranceFragmentViewModel(
     private val entranceRepository: EntranceRepository,
-    private val dispatchers: Dispatchers
+    private val coroutineDispatchers: CoroutineDispatchers
 ) : ViewModel() {
 
     private val _cats = MutableLiveData<List<Cat>>()
@@ -22,7 +22,7 @@ class EntranceFragmentViewModel(
         }
 
     init {
-        viewModelScope.launch(dispatchers.ioDispatchers + coroutineExceptionHandler) {
+        viewModelScope.launch(coroutineDispatchers.ioDispatchers + coroutineExceptionHandler) {
             val dataFromNetwork = entranceRepository.getAllCats()
             if (dataFromNetwork.isSuccessful) {
                 insertToDatabase(dataFromNetwork.body())

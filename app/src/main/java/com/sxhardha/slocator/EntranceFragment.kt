@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_entrance.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -20,11 +19,7 @@ class EntranceFragment : Fragment(), KodeinAware {
 
     private val viewModelFactory: EntranceVMFactory by instance()
 
-    private val picasso: Picasso by instance()
-
-    private val catAdapter by lazy {
-        CatAdapter(picasso)
-    }
+    private val catAdapter: CatAdapter by instance()
 
     private val entranceViewModel: EntranceFragmentViewModel by viewModels {
         viewModelFactory

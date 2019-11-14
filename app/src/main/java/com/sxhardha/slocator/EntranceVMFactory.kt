@@ -6,8 +6,8 @@ import androidx.lifecycle.ViewModelProvider
 
 class EntranceVMFactory(
     private val repository: EntranceRepository,
-    private val dispatchers: Dispatchers
+    private val coroutineDispatchers: CoroutineDispatchers
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-        EntranceFragmentViewModel(repository, dispatchers) as T
+        EntranceFragmentViewModel(repository, coroutineDispatchers) as T
 }

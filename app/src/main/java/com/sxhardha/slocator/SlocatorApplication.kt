@@ -1,17 +1,17 @@
 package com.sxhardha.slocator
 
 import android.app.Application
+import androidx.fragment.app.Fragment
 import androidx.room.Room
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
-import org.kodein.di.generic.bind
-import org.kodein.di.generic.instance
-import org.kodein.di.generic.provider
-import org.kodein.di.generic.singleton
+import org.kodein.di.bindings.WeakContextScope
+import org.kodein.di.generic.*
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
@@ -50,16 +50,22 @@ class SlocatorApplication : Application(), KodeinAware {
 
         bind<EntranceRepository>() with singleton { EntranceRepository(instance(), instance()) }
 
-        bind<Dispatchers>() with singleton {
-            Dispatchers(
-                kotlinx.coroutines.Dispatchers.Main,
-                kotlinx.coroutines.Dispatchers.IO
+        bind<CoroutineDispatchers>() with singleton {
+            CoroutineDispatchers(
+                Dispatchers.Main,
+                Dispatchers.IO
             )
         }
 
         bind() from provider {
             EntranceVMFactory(
                 instance(),
+                instance()
+            )
+        }
+
+        bind<CatAdapter>() with scoped(WeakContextScope.of<Fragment>()).singleton {
+            CatAdapter(
                 instance()
             )
         }
