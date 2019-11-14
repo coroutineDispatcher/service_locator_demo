@@ -1,8 +1,9 @@
-package com.sxhardha.slocator
+package com.sxhardha.slocator.database
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import com.sxhardha.slocator.model.Cat
 
 @Dao
 interface CatDAO {

@@ -1,4 +1,8 @@
-package com.sxhardha.slocator
+package com.sxhardha.slocator.ui
+
+import com.sxhardha.slocator.database.CatDAO
+import com.sxhardha.slocator.model.Cat
+import com.sxhardha.slocator.network.SomeApiInterface
 
 class EntranceRepository(
     private val someApiInterface: SomeApiInterface,

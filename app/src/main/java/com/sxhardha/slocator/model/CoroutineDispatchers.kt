@@ -1,9 +1,9 @@
-package com.sxhardha.slocator
+package com.sxhardha.slocator.model
 
 import kotlinx.coroutines.CoroutineDispatcher
 
 
-data class Dispatchers(
+data class CoroutineDispatchers(
     val mainDispatcher: CoroutineDispatcher,
     val ioDispatchers: CoroutineDispatcher
 )

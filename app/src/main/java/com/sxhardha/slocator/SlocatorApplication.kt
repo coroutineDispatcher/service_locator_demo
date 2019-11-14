@@ -3,65 +3,88 @@ package com.sxhardha.slocator
 import android.app.Application
 import androidx.room.Room
 import com.squareup.picasso.Picasso
+import com.sxhardha.slocator.database.CatDatabase
+import com.sxhardha.slocator.model.CoroutineDispatchers
+import com.sxhardha.slocator.network.SomeApiInterface
+import com.sxhardha.slocator.ui.CatAdapter
+import com.sxhardha.slocator.ui.EntranceFragment
+import com.sxhardha.slocator.ui.EntranceFragmentViewModel
+import com.sxhardha.slocator.ui.EntranceRepository
+import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.androidXModule
-import org.kodein.di.generic.bind
-import org.kodein.di.generic.instance
-import org.kodein.di.generic.provider
-import org.kodein.di.generic.singleton
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.android.viewmodel.dsl.viewModel
+import org.koin.core.context.startKoin
+import org.koin.core.qualifier.named
+import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-class SlocatorApplication : Application(), KodeinAware {
+class SlocatorApplication : Application() {
 
-    override val kodein by Kodein.lazy {
-        import(androidXModule(this@SlocatorApplication))
+    private val mainModule = module {
 
-        bind<HttpLoggingInterceptor>() with singleton {
+        single {
             val httpLoggingInterceptor = HttpLoggingInterceptor()
             httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
-            return@singleton httpLoggingInterceptor
+            return@single httpLoggingInterceptor
         }
 
-        bind<OkHttpClient>() with singleton {
-            OkHttpClient.Builder().addInterceptor(instance<HttpLoggingInterceptor>()).build()
+        single {
+            OkHttpClient.Builder().addInterceptor(get<HttpLoggingInterceptor>()).build()
         }
 
-        bind<Retrofit>() with singleton {
+        single {
             Retrofit.Builder().baseUrl("https://api.thecatapi.com/v1/images/")
-                .client(instance())
+                .client(get())
                 .addConverterFactory(MoshiConverterFactory.create()).build()
         }
 
-        bind<SomeApiInterface>() with singleton { instance<Retrofit>().create(SomeApiInterface::class.java) }
+        single { get<Retrofit>().create(SomeApiInterface::class.java) }
 
-        bind<CatDatabase>() with singleton {
-            Room.databaseBuilder(instance(), CatDatabase::class.java, "cat_db")
+        single {
+            Room.databaseBuilder(get(), CatDatabase::class.java, "cat_db")
                 .fallbackToDestructiveMigration()
                 .build()
         }
 
-        bind<CatDAO>() with singleton { instance<CatDatabase>().catDao() }
+        single {
+            get<CatDatabase>().catDao()
+        }
 
-        bind<Picasso>() with singleton { Picasso.get() }
+        single {
+            Picasso.get()
+        }
 
-        bind<EntranceRepository>() with singleton { EntranceRepository(instance(), instance()) }
-
-        bind<Dispatchers>() with singleton {
-            Dispatchers(
-                kotlinx.coroutines.Dispatchers.Main,
-                kotlinx.coroutines.Dispatchers.IO
+        single {
+            CoroutineDispatchers(
+                Dispatchers.Main,
+                Dispatchers.IO
             )
         }
 
-        bind() from provider {
-            EntranceVMFactory(
-                instance(),
-                instance()
-            )
+        factory {
+            EntranceRepository(get(), get())
+        }
+
+        viewModel {
+            EntranceFragmentViewModel(get(), get())
+        }
+
+        scope(named<EntranceFragment>()) {
+            scoped { CatAdapter(get()) }
+        }
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+
+        startKoin {
+            androidLogger()
+            androidContext(this@SlocatorApplication)
+            modules(mainModule)
         }
     }
 }

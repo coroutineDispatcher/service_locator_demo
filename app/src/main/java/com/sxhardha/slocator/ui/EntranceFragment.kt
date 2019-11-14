@@ -1,34 +1,22 @@
-package com.sxhardha.slocator
+package com.sxhardha.slocator.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.squareup.picasso.Picasso
+import com.sxhardha.slocator.R
 import kotlinx.android.synthetic.main.fragment_entrance.*
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.kodein
-import org.kodein.di.generic.instance
+import org.koin.android.scope.currentScope
+import org.koin.android.viewmodel.ext.android.viewModel
 
 
-class EntranceFragment : Fragment(), KodeinAware {
-    override val kodein: Kodein by kodein()
+class EntranceFragment : Fragment() {
 
-    private val viewModelFactory: EntranceVMFactory by instance()
+    private val catAdapter: CatAdapter by currentScope.inject()
 
-    private val picasso: Picasso by instance()
-
-    private val catAdapter by lazy {
-        CatAdapter(picasso)
-    }
-
-    private val entranceViewModel: EntranceFragmentViewModel by viewModels {
-        viewModelFactory
-    }
+    private val entranceViewModel: EntranceFragmentViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,

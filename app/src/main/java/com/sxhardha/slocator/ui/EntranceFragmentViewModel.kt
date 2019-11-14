@@ -1,16 +1,18 @@
-package com.sxhardha.slocator
+package com.sxhardha.slocator.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sxhardha.slocator.model.CoroutineDispatchers
+import com.sxhardha.slocator.model.Cat
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 
 
 class EntranceFragmentViewModel(
     private val entranceRepository: EntranceRepository,
-    private val dispatchers: Dispatchers
+    private val coroutineDispatchers: CoroutineDispatchers
 ) : ViewModel() {
 
     private val _cats = MutableLiveData<List<Cat>>()
@@ -22,7 +24,7 @@ class EntranceFragmentViewModel(
         }
 
     init {
-        viewModelScope.launch(dispatchers.ioDispatchers + coroutineExceptionHandler) {
+        viewModelScope.launch(coroutineDispatchers.ioDispatchers + coroutineExceptionHandler) {
             val dataFromNetwork = entranceRepository.getAllCats()
             if (dataFromNetwork.isSuccessful) {
                 insertToDatabase(dataFromNetwork.body())

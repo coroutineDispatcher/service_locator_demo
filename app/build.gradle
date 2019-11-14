@@ -72,7 +72,11 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.2.0-beta02'
     kapt 'androidx.room:room-compiler:2.2.1'
     kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.8.0'
-    implementation 'org.kodein.di:kodein-di-generic-jvm:6.4.1'
-    implementation 'org.kodein.di:kodein-di-framework-android-x:6.4.1'
     implementation 'com.squareup.retrofit2:converter-moshi:2.4.0'
+    // Koin for Android
+    implementation 'org.koin:koin-android:2.0.1'
+    // or Koin for Lifecycle scoping
+    implementation 'org.koin:koin-android-scope:2.0.1'
+    // or Koin for Android Architecture ViewModel
+    implementation 'org.koin:koin-android-viewmodel:2.0.1'
 }

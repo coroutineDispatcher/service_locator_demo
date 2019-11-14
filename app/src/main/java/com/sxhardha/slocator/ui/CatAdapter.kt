@@ -1,4 +1,4 @@
-package com.sxhardha.slocator
+package com.sxhardha.slocator.ui
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import com.sxhardha.slocator.R
+import com.sxhardha.slocator.model.Cat
 import kotlinx.android.synthetic.main.single_item_cat.view.*
 
 
