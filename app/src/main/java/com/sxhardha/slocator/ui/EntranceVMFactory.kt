@@ -4,13 +4,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.sxhardha.slocator.model.CoroutineDispatchers
 import javax.inject.Inject
-import javax.inject.Provider
 
 
 class EntranceVMFactory @Inject constructor(
-    private val repository: Provider<EntranceRepository>,
-    private val coroutineDispatchers: Provider<CoroutineDispatchers>
+    private val repository: EntranceRepository,
+    private val coroutineDispatchers: CoroutineDispatchers
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-        EntranceFragmentViewModel(repository.get(), coroutineDispatchers.get()) as T
+        EntranceFragmentViewModel(repository, coroutineDispatchers) as T
 }
