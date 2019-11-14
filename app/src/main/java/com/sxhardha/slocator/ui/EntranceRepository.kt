@@ -3,8 +3,9 @@ package com.sxhardha.slocator.ui
 import com.sxhardha.slocator.database.CatDAO
 import com.sxhardha.slocator.model.Cat
 import com.sxhardha.slocator.network.SomeApiInterface
+import javax.inject.Inject
 
-class EntranceRepository(
+class EntranceRepository @Inject constructor(
     private val someApiInterface: SomeApiInterface,
     private val catDAO: CatDAO
 ) {

@@ -10,9 +10,10 @@ import com.squareup.picasso.Picasso
 import com.sxhardha.slocator.R
 import com.sxhardha.slocator.model.Cat
 import kotlinx.android.synthetic.main.single_item_cat.view.*
+import javax.inject.Inject
 
 
-class CatAdapter(private val picasso: Picasso) :
+class CatAdapter @Inject constructor(private val picasso: Picasso) :
     ListAdapter<Cat, CatAdapter.CatViewHolder>(DIFF_UTIL_CATS) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatViewHolder =
         CatViewHolder(

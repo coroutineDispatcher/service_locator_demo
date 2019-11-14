@@ -8,9 +8,10 @@ import com.sxhardha.slocator.model.Cat
 import com.sxhardha.slocator.model.CoroutineDispatchers
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 
-class EntranceFragmentViewModel(
+class EntranceFragmentViewModel @Inject constructor(
     private val entranceRepository: EntranceRepository,
     private val coroutineDispatchers: CoroutineDispatchers
 ) : ViewModel() {
