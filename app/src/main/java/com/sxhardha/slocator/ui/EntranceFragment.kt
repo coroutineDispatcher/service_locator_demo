@@ -1,4 +1,4 @@
-package com.sxhardha.slocator
+package com.sxhardha.slocator.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import com.sxhardha.slocator.R
 import kotlinx.android.synthetic.main.fragment_entrance.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware

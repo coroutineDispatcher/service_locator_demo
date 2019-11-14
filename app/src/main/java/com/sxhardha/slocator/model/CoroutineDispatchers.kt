@@ -1,4 +1,4 @@
-package com.sxhardha.slocator
+package com.sxhardha.slocator.model
 
 import kotlinx.coroutines.CoroutineDispatcher
 

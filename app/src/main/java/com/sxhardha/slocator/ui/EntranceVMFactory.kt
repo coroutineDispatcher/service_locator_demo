@@ -1,7 +1,8 @@
-package com.sxhardha.slocator
+package com.sxhardha.slocator.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.sxhardha.slocator.model.CoroutineDispatchers
 
 
 class EntranceVMFactory(

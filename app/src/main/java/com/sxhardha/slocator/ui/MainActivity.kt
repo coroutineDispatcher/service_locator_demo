@@ -1,7 +1,8 @@
-package com.sxhardha.slocator
+package com.sxhardha.slocator.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.sxhardha.slocator.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -5,6 +5,6 @@
 
     <fragment
         android:id="@+id/entranceFragment"
-        android:name="com.sxhardha.slocator.EntranceFragment"
+        android:name="com.sxhardha.slocator.ui.EntranceFragment"
         android:label="EntranceFragment" />
 </navigation>

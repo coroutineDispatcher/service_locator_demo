@@ -1,9 +1,11 @@
-package com.sxhardha.slocator
+package com.sxhardha.slocator.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sxhardha.slocator.model.Cat
+import com.sxhardha.slocator.model.CoroutineDispatchers
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 
